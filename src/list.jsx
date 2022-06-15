@@ -18,7 +18,7 @@ const List = ({ repo, username }) => {
         // setDetailsLoading(false);
         setDetails(res.data);
       });
-  }, []);
+  }, [username, repo.name]);
 
   // if (detailsLoading) {
   //   return <h1 className="loader">Loading...</h1>;
