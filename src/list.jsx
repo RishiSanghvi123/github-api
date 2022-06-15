@@ -3,25 +3,26 @@ import axios from "axios";
 import "./App.css";
 
 const List = ({ repo, username }) => {
-  //   if (loading) {
-  //     return <h1 className="loader">Loading...</h1>;
-  //   }
   const [show, setShow] = useState(false);
   const [details, setDetails] = useState({});
-  const [detailsLoading, setDetailsLoading] = useState(false);
+  //const [detailsLoading, setDetailsLoading] = useState(false);
 
   //   const handleChange = () => {
   //     setChecked(!checked);
   //   };
   useEffect(() => {
-    setDetailsLoading(true);
+    //setDetailsLoading(true);
     axios
       .get(`https://api.github.com/repos/${username}/${repo.name}`)
       .then((res) => {
-        setDetailsLoading(false);
+        // setDetailsLoading(false);
         setDetails(res.data);
       });
   }, []);
+
+  // if (detailsLoading) {
+  //   return <h1 className="loader">Loading...</h1>;
+  // }
 
   return (
     <div className="list-container">

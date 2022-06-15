@@ -1,25 +1,28 @@
 import axios from "axios";
 import { useState, useEffect } from "react";
 import "./App.css";
-import RepoDetails from "./repoDetails";
+// import RepoDetails from "./repoDetails";
 import List from "./list";
 
 function App() {
   const [username, setUsername] = useState("");
   const [loading, setLoading] = useState(false);
   const [repos, setRepos] = useState([]);
-  const [details, setDetails] = useState({});
-  const [detailsLoading, setDetailsLoading] = useState(false);
+  // const [details, setDetails] = useState({});
+  // const [detailsLoading, setDetailsLoading] = useState(false);
   const [error, setError] = useState(false);
-  const [checked, setChecked] = useState(true);
+  // const [checked, setChecked] = useState(true);
 
-  const handleChange = () => {
-    setChecked(!checked);
-  };
+  function compare(a, b) {
+    if (a.forks >= b.forks) {
+      return -1;
+    }
+    return 1;
+  }
 
   useEffect(() => {
     setRepos([]);
-    setDetails({});
+    // setDetails({});
     setError(false);
   }, [username]);
 
@@ -35,7 +38,7 @@ function App() {
       .get(`https://api.github.com/users/${username}/repos`)
       .then((res) => {
         setLoading(false);
-        setRepos(res.data);
+        setRepos(res.data.sort(compare));
         console.log(repos);
       })
       .catch((err) => {
@@ -44,15 +47,15 @@ function App() {
       });
   };
 
-  const getDetails = (repoName) => {
-    setDetailsLoading(true);
-    axios
-      .get(`https://api.github.com/repos/${username}/${repoName}`)
-      .then((res) => {
-        setDetailsLoading(false);
-        setDetails(res.data);
-      });
-  };
+  // const getDetails = (repoName) => {
+  //   setDetailsLoading(true);
+  //   axios
+  //     .get(`https://api.github.com/repos/${username}/${repoName}`)
+  //     .then((res) => {
+  //       setDetailsLoading(false);
+  //       setDetails(res.data);
+  //     });
+  // };
 
   return (
     <div className="App">
