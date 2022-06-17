@@ -1,10 +1,12 @@
 import axios from "axios";
 import { useState, useEffect } from "react";
 import "./App.css";
+// import { Octokit } from "https://cdn.skypack.dev/@octokit/rest";
 // import RepoDetails from "./repoDetails";
 import List from "./list";
 
 function App() {
+  //const { Octokit } = require("@octokit/rest");
   const [username, setUsername] = useState("");
   const [loading, setLoading] = useState(false);
   const [repos, setRepos] = useState([]);
@@ -31,11 +33,22 @@ function App() {
     searchRepos();
   };
 
+  // const octokit = new Octokit({
+  //   auth: "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",
+  // });
+
+  // const x = octokit.request("GET /search/users", {});
+  // console.log(x);
+
   const searchRepos = () => {
     setLoading(true);
 
     axios
-      .get(`https://api.github.com/users/${username}/repos`)
+      .get(`https://api.github.com/users/${username}/repos`, {
+        auth: {
+          username: "RishiSanghvi123",
+        },
+      })
       .then((res) => {
         setLoading(false);
         setRepos(res.data.sort(compare));

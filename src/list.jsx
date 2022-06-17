@@ -13,7 +13,11 @@ const List = ({ repo, username }) => {
   useEffect(() => {
     //setDetailsLoading(true);
     axios
-      .get(`https://api.github.com/repos/${username}/${repo.name}`)
+      .get(`https://api.github.com/repos/${username}/${repo.name}`, {
+        auth: {
+          username: "RishiSanghvi123",
+        },
+      })
       .then((res) => {
         // setDetailsLoading(false);
         setDetails(res.data);
