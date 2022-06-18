@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import "./App.css";
-import env from "react-dotenv";
 
 const List = ({ repo, username }) => {
   const [show, setShow] = useState(false);
