@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import "./App.css";
+import env from "react-dotenv";
 
 const List = ({ repo, username }) => {
   const [show, setShow] = useState(false);
@@ -14,8 +15,8 @@ const List = ({ repo, username }) => {
     //setDetailsLoading(true);
     axios
       .get(`https://api.github.com/repos/${username}/${repo.name}`, {
-        auth: {
-          username: "RishiSanghvi123",
+        headers: {
+          Authorization: `Bearer ${process.env.REACT_APP_TOKEN_KEY}`,
         },
       })
       .then((res) => {

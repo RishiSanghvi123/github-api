@@ -6,6 +6,7 @@ import "./App.css";
 import List from "./list";
 
 function App() {
+  delete axios.defaults.headers.common["OAuth-Token"];
   //const { Octokit } = require("@octokit/rest");
   const [username, setUsername] = useState("");
   const [loading, setLoading] = useState(false);
@@ -30,8 +31,10 @@ function App() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    //setUsername(e);
     searchRepos();
   };
+  console.log(process.env);
 
   // const octokit = new Octokit({
   //   auth: "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",
@@ -45,8 +48,8 @@ function App() {
 
     axios
       .get(`https://api.github.com/users/${username}/repos`, {
-        auth: {
-          username: "RishiSanghvi123",
+        headers: {
+          Authorization: `Bearer ${process.env.REACT_APP_TOKEN_KEY}`,
         },
       })
       .then((res) => {
