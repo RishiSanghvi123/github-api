@@ -34,7 +34,6 @@ function App() {
     //setUsername(e);
     searchRepos();
   };
-  console.log(process.env);
 
   // const octokit = new Octokit({
   //   auth: "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",
